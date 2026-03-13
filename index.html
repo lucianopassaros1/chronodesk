@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronodesk | Timer, Cronômetro e Alarme Online</title>
+<meta name="description" content="Timer online, cronômetro com milissegundos, alarme e contagem regressiva. Cotações em tempo real.">
+<meta name="keywords" content="timer online, cronômetro, alarme, contagem regressiva, dólar, euro, bitcoin">
+<meta name="author" content="Chronodesk">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #f0f2f5;
+    --bg-secondary: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-time: #1a2a6c;
+    --card-bg: #ffffff;
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    --border-color: #e2e8f0;
+    --hover-bg: #f8fafc;
+    --accent-blue: #1a2a6c;
+    --accent-red: #b21f1f;
+    --accent-gold: #fdbb2d;
+}
+
+.dark-mode {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-time: #fdbb2d;
+    --card-bg: #1e293b;
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    --border-color: #334155;
+    --hover-bg: #2d3a4f;
+    --accent-blue: #60a5fa;
+    --accent-red: #f87171;
+    --accent-gold: #fdbb2d;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s;
+}
+
+/* Header */
+.main-header {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo h1 {
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo span {
+    font-size: 14px;
+    opacity: 0.9;
+    font-weight: normal;
+}
+
+.dark-mode-toggle {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+}
+
+.dark-mode-toggle:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+/* Relógios mundiais */
+.world-clocks {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.1);
+    padding: 15px 25px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+
+.city-clock {
+    text-align: center;
+    min-width: 120px;
+}
+
+.city-name {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.city-time {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+.city-date {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+/* Relógio principal */
+.main-clock {
+    text-align: right;
+}
+
+.main-clock .time {
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 1;
+    font-family: 'Courier New', monospace;
+}
+
+.main-clock .date {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+/* Navegação */
+nav {
+    background: var(--card-bg);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.nav-btn {
+    padding: 12px 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-btn i {
+    font-size: 18px;
+}
+
+.nav-btn:hover {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    color: white;
+    transform: translateY(-2px);
+    border-color: transparent;
+}
+
+.nav-btn.active {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    color: white;
+    border-color: transparent;
+}
+
+/* Layout principal */
+.main-wrapper {
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Cards */
+.function-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.card-title {
+    font-size: 28px;
+    color: var(--accent-blue);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.card-title i {
+    color: var(--accent-red);
+}
+
+.time-display {
+    font-size: 72px;
+    font-weight: bold;
+    color: var(--text-time);
+    text-align: center;
+    margin: 30px 0;
+    font-family: 'Courier New', monospace;
+    transition: color 0.3s;
+}
+
+.stopwatch-display {
+    font-size: 64px;
+    font-weight: bold;
+    color: var(--text-time);
+    text-align: center;
+    margin: 30px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.stopwatch-display small {
+    font-size: 32px;
+    opacity: 0.7;
+}
+
+.control-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.control-input {
+    padding: 15px 25px;
+    font-size: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    width: 200px;
+    text-align: center;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.control-input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+.btn {
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(178,31,31,0.3);
+}
+
+.btn-secondary {
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--hover-bg);
+    transform: translateY(-2px);
+}
+
+.btn-stop {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-stop:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+}
+
+/* Widget de notícias */
+.news-widget {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.news-title {
+    font-size: 20px;
+    color: var(--accent-blue);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.news-link {
+    background: var(--bg-primary);
+    padding: 15px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+    border: 1px solid var(--border-color);
+    font-weight: 500;
+}
+
+.news-link:hover {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
+    color: white;
+    transform: translateY(-2px);
+    border-color: transparent;
+}
+
+.news-link i {
+    font-size: 20px;
+    color: var(--accent-red);
+}
+
+.news-link:hover i {
+    color: white;
+}
+
+/* Coluna da direita */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Card do Planejador BR (antigo Calcula Meu Bolso PE) */
+.calculadora-card {
+    background: linear-gradient(135deg, #1a2a6c, #0f1a3d);
+    color: white;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.calculadora-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.calculadora-header i {
+    font-size: 48px;
+    color: #fdbb2d;
+}
+
+.calculadora-header h2 {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+/* Cotações */
+.quotes-container {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 25px 0;
+    backdrop-filter: blur(10px);
+}
+
+.quotes-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #fdbb2d;
+}
+
+.quote-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.quote-item:last-child {
+    border-bottom: none;
+}
+
+.quote-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quote-name i {
+    color: #fdbb2d;
+    width: 24px;
+    font-size: 18px;
+}
+
+.quote-value {
+    font-weight: bold;
+    font-size: 18px;
+    color: #fdbb2d;
+}
+
+.quote-change {
+    font-size: 13px;
+    margin-left: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.2);
+}
+
+.quote-change.positive {
+    color: #4ade80;
+}
+
+.quote-change.negative {
+    color: #f87171;
+}
+
+/* Contagem regressiva */
+.countdown-section {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.countdown-title {
+    font-size: 20px;
+    color: var(--accent-blue);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.countdown-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.countdown-item {
+    background: var(--bg-primary);
+    border-radius: 16px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.countdown-item h4 {
+    color: var(--accent-red);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.countdown-timer {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-time);
+    font-family: 'Courier New', monospace;
+    margin: 5px 0;
+}
+
+.countdown-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* Features */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.feature-item {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.feature-item i {
+    color: #fdbb2d;
+}
+
+.btn-calculadora {
+    width: 100%;
+    padding: 18px;
+    background: #fdbb2d;
+    color: #1a2a6c;
+    border: none;
+    border-radius: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-calculadora:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(253,187,45,0.3);
+}
+
+/* Links Úteis */
+.links-widget {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.links-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.util-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: var(--bg-primary);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s;
+    border: 1px solid var(--border-color);
+}
+
+.util-link:hover {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
+    color: white;
+    transform: translateX(-5px);
+    border-color: transparent;
+}
+
+.util-link i {
+    width: 24px;
+    color: var(--accent-red);
+    font-size: 18px;
+}
+
+.util-link:hover i {
+    color: white;
+}
+
+/* Notificações - BIPS CONTÍNUOS */
+.notification {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    color: white;
+    padding: 25px 50px;
+    border-radius: 60px;
+    z-index: 1000;
+    font-size: 28px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    animation: slideDown 0.5s ease, pulse 1s infinite;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+@keyframes pulse {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.02); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
+.notification button {
+    padding: 12px 30px;
+    background: white;
+    color: #b21f1f;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    transition: all 0.3s;
+}
+
+.notification button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255,255,255,0.3);
+}
+
+@keyframes slideDown {
+    from { top: -100px; opacity: 0; }
+    to { top: 100px; opacity: 1; }
+}
+
+/* Espaço para AdSense */
+.ad-space {
+    background: var(--bg-primary);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    border: 2px dashed var(--accent-red);
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* Rodapé */
+footer {
+    background: #1a2a6c;
+    color: white;
+    padding: 30px 20px 15px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    opacity: 0.7;
+    font-size: 13px;
+}
+
+/* Cookie notice */
+.cookie-notice {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    padding: 15px 25px;
+    border-radius: 60px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    z-index: 1000;
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid var(--border-color);
+}
+
+.cookie-notice p {
+    color: var(--text-primary);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.cookie-btn.accept {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
+    color: white;
+}
+
+.cookie-btn.preferences {
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.cookie-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .main-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .world-clocks {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .main-clock {
+        text-align: center;
+    }
+    
+    .main-clock .time {
+        font-size: 36px;
+    }
+    
+    .time-display, .stopwatch-display {
+        font-size: 48px;
+    }
+    
+    .stopwatch-display small {
+        font-size: 24px;
+    }
+    
+    .world-clocks {
+        border-radius: 20px;
+        padding: 15px;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .notification {
+        font-size: 20px;
+        padding: 15px 25px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>
+                    <i class="fas fa-clock"></i> 
+                    Chronodesk
+                    <span>by Planejador BR</span>
+                </h1>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            
+            <!-- Relógios Mundiais -->
+            <div class="world-clocks">
+                <div class="city-clock">
+                    <div class="city-name">NOVA YORK</div>
+                    <div class="city-time" id="nyTime">--:--:--</div>
+                    <div class="city-date" id="nyDate">---</div>
+                </div>
+                <div class="city-clock">
+                    <div class="city-name">LONDRES</div>
+                    <div class="city-time" id="londonTime">--:--:--</div>
+                    <div class="city-date" id="londonDate">---</div>
+                </div>
+                <div class="city-clock">
+                    <div class="city-name">TÓQUIO</div>
+                    <div class="city-time" id="tokyoTime">--:--:--</div>
+                    <div class="city-date" id="tokyoDate">---</div>
+                </div>
+            </div>
+            
+            <div class="main-clock">
+                <div class="time" id="mainTime">--:--:--</div>
+                <div class="date" id="mainDate">---, -- DE --- DE ----</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navegação -->
+    <nav>
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('timer')">
+                <i class="fas fa-hourglass-half"></i> Timer
+            </button>
+            <button class="nav-btn" onclick="showSection('stopwatch')">
+                <i class="fas fa-stopwatch"></i> Cronômetro
+            </button>
+            <button class="nav-btn" onclick="showSection('alarm')">
+                <i class="fas fa-bell"></i> Alarme
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Layout principal -->
+    <div class="main-wrapper">
+        <!-- Coluna da ESQUERDA -->
+        <div class="left-column">
+            <!-- Timer Section -->
+            <div id="timerSection" class="function-card">
+                <h2 class="card-title">
+                    <i class="fas fa-hourglass-half"></i>
+                    Timer Online
+                </h2>
+                <div class="control-group">
+                    <input type="number" id="timerMinutes" class="control-input" placeholder="Minutos" min="1" value="1">
+                    <button class="btn btn-primary" onclick="startTimer()">
+                        <i class="fas fa-play"></i> Iniciar
+                    </button>
+                </div>
+                <div class="time-display" id="timerDisplay">00:00</div>
+            </div>
+            
+            <!-- Stopwatch Section com milissegundos -->
+            <div id="stopwatchSection" style="display: none;" class="function-card">
+                <h2 class="card-title">
+                    <i class="fas fa-stopwatch"></i>
+                    Cronômetro
+                </h2>
+                <div class="stopwatch-display" id="stopwatch">
+                    00:00:00<small>.00</small>
+                </div>
+                <div class="control-group">
+                    <button class="btn btn-primary" onclick="startStopwatch()">
+                        <i class="fas fa-play"></i> Iniciar
+                    </button>
+                    <button class="btn btn-secondary" onclick="stopStopwatch()">
+                        <i class="fas fa-pause"></i> Parar
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetStopwatch()">
+                        <i class="fas fa-redo"></i> Resetar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Alarm Section -->
+            <div id="alarmSection" style="display: none;" class="function-card">
+                <h2 class="card-title">
+                    <i class="fas fa-bell"></i>
+                    Alarme
+                </h2>
+                <div class="control-group">
+                    <input type="time" id="alarmTime" class="control-input" value="08:00">
+                    <button class="btn btn-primary" onclick="setAlarm()">
+                        <i class="fas fa-clock"></i> Ativar
+                    </button>
+                </div>
+                <div id="alarmStatus" style="text-align: center; margin-top: 20px; color: var(--text-secondary);">
+                    Configure um horário para o alarme
+                </div>
+            </div>
+            
+            <!-- Widget de Notícias -->
+            <div class="news-widget">
+                <h3 class="news-title">
+                    <i class="fas fa-newspaper"></i>
+                    Principais Notícias
+                </h3>
+                
+                <div class="news-grid">
+                    <a href="https://globo.com" target="_blank" class="news-link">
+                        <i class="fas fa-globe"></i>
+                        Globo.com
+                    </a>
+                    <a href="https://uol.com.br" target="_blank" class="news-link">
+                        <i class="fas fa-chart-line"></i>
+                        UOL
+                    </a>
+                    <a href="https://cnnbrasil.com.br" target="_blank" class="news-link">
+                        <i class="fas fa-tower-broadcast"></i>
+                        CNN Brasil
+                    </a>
+                    <a href="https://g1.globo.com" target="_blank" class="news-link">
+                        <i class="fas fa-newspaper"></i>
+                        G1
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Espaço para AdSense -->
+            <div class="ad-space">
+                <i class="fas fa-ad"></i> Espaço reservado para Google AdSense
+            </div>
+        </div>
+        
+        <!-- Coluna da DIREITA -->
+        <div class="right-column">
+            <!-- Card do Planejador BR -->
+            <div class="calculadora-card">
+                <div class="calculadora-header">
+                    <i class="fas fa-calculator"></i>
+                    <h2>Planejador BR</h2>
+                </div>
+                
+                <p style="margin-bottom: 15px; opacity: 0.9;">Calculadoras financeiras completas e gratuitas</p>
+                
+                <!-- Cotações -->
+                <div class="quotes-container">
+                    <div class="quotes-title">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Cotações em Tempo Real</span>
+                    </div>
+                    
+                    <div class="quote-item">
+                        <span class="quote-name"><i class="fas fa-dollar-sign"></i> Dólar</span>
+                        <span>
+                            <span class="quote-value" id="dolarValue">5,79</span>
+                            <span class="quote-change negative" id="dolarChange">-0,1%</span>
+                        </span>
+                    </div>
+                    
+                    <div class="quote-item">
+                        <span class="quote-name"><i class="fas fa-euro-sign"></i> Euro</span>
+                        <span>
+                            <span class="quote-value" id="euroValue">6,37</span>
+                            <span class="quote-change negative" id="euroChange">-0,2%</span>
+                        </span>
+                    </div>
+                    
+                    <div class="quote-item">
+                        <span class="quote-name"><i class="fas fa-pound-sign"></i> Libra</span>
+                        <span>
+                            <span class="quote-value" id="libraValue">7,41</span>
+                            <span class="quote-change negative" id="libraChange">-0,1%</span>
+                        </span>
+                    </div>
+                    
+                    <div class="quote-item">
+                        <span class="quote-name"><i class="fas fa-btc"></i> Bitcoin</span>
+                        <span>
+                            <span class="quote-value" id="btcValue">384.649</span>
+                            <span class="quote-change negative" id="btcChange">-1,2%</span>
+                        </span>
+                    </div>
+                    
+                    <div class="quote-item">
+                        <span class="quote-name"><i class="fas fa-chart-pie"></i> Selic</span>
+                        <span>
+                            <span class="quote-value" id="selicRate">15,00%</span>
+                            <span class="quote-change positive" id="selicChange">+0,25%</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Features -->
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Juros Compostos</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Financiamento Carro</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Financiamento Imobiliário</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Empréstimo Pessoal</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Comparador Renda Fixa</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Conversor de Moedas</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Salário Líquido</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Reajuste Aluguel</span>
+                    </div>
+                </div>
+                
+                <!-- BOTÃO COM LINK ATUALIZADO -->
+                <button class="btn-calculadora" onclick="window.open('https://planejador-br.vercel.app/', '_blank')">
+                    <i class="fas fa-external-link-alt"></i>
+                    ACESSAR PLANEJADOR BR
+                </button>
+            </div>
+            
+            <!-- Contagem Regressiva -->
+            <div class="countdown-section">
+                <h3 class="countdown-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Contagem Regressiva
+                </h3>
+                
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <h4><i class="fas fa-gift"></i> Natal</h4>
+                        <div class="countdown-timer" id="countdownNatal">--d --h --m</div>
+                        <div class="countdown-label">25 de dezembro</div>
+                    </div>
+                    
+                    <div class="countdown-item">
+                        <h4><i class="fas fa-champagne-glasses"></i> Ano Novo</h4>
+                        <div class="countdown-timer" id="countdownAnoNovo">--d --h --m</div>
+                        <div class="countdown-label">1º de janeiro</div>
+                    </div>
+                    
+                    <div class="countdown-item">
+                        <h4><i class="fas fa-book"></i> ENEM</h4>
+                        <div class="countdown-timer" id="countdownEnem">--d --h --m</div>
+                        <div class="countdown-label">Próximo exame</div>
+                    </div>
+                    
+                    <div class="countdown-item">
+                        <h4><i class="fas fa-futbol"></i> Copa 2026</h4>
+                        <div class="countdown-timer" id="countdownCopa">--d --h --m</div>
+                        <div class="countdown-label">11 de junho</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Links Úteis -->
+            <div class="links-widget">
+                <h3 class="news-title">
+                    <i class="fas fa-link"></i>
+                    Links Úteis
+                </h3>
+                
+                <div class="links-grid">
+                    <a href="https://www.gov.br/receitafederal" target="_blank" class="util-link">
+                        <i class="fas fa-building"></i>
+                        Receita Federal
+                    </a>
+                    <a href="https://meu.inss.gov.br/#/login" target="_blank" class="util-link">
+                        <i class="fas fa-id-card"></i>
+                        Meu INSS
+                    </a>
+                    <a href="https://www.caixa.gov.br" target="_blank" class="util-link">
+                        <i class="fas fa-university"></i>
+                        Caixa Econômica
+                    </a>
+                    <a href="https://www8.receita.fazenda.gov.br/SimplesNacional" target="_blank" class="util-link">
+                        <i class="fas fa-file-invoice"></i>
+                        Simples Nacional
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Segundo espaço para AdSense -->
+            <div class="ad-space">
+                <i class="fas fa-ad"></i> Publicidade
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3 style="margin-bottom: 5px;">Chronodesk</h3>
+                <p style="opacity: 0.8; font-size: 14px;">Timer online + Planejador BR</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#">Sobre</a>
+                <a href="#">Privacidade</a>
+                <a href="#">Termos</a>
+                <a href="#">Contato</a>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2026 Chronodesk - Timer, cronômetro com milissegundos, alarme contínuo</p>
+        </div>
+    </footer>
+    
+    <!-- Cookie Notice -->
+    <div class="cookie-notice" id="cookieNotice">
+        <p>
+            <i class="fas fa-cookie-bite" style="color: #b21f1f;"></i>
+            Usamos cookies para melhorar sua experiência. Ao continuar, você concorda com nossa política de privacidade.
+        </p>
+        <div class="cookie-buttons">
+            <button class="cookie-btn preferences" onclick="openCookiePreferences()">Preferências</button>
+            <button class="cookie-btn accept" onclick="acceptCookies()">Aceitar todos</button>
+        </div>
+    </div>
+
+<script>
+// ==================== FUNÇÕES DE ÁUDIO ====================
+let audioContext = null;
+let beepInterval = null;
+let isAlarmPlaying = false;
+
+function initAudio() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioContext;
+}
+
+// Função para tocar um bip curto
+function playBeep() {
+    try {
+        const ctx = initAudio();
+        
+        if (ctx.state === 'suspended') {
+            ctx.resume();
+        }
+        
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.value = 880;
+        gain.gain.value = 0.3;
+        
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        
+        osc.start();
+        osc.stop(ctx.currentTime + 0.15); // Bip curto de 150ms
+    } catch (e) {
+        console.log("Erro ao tocar bip:", e);
+    }
+}
+
+// Inicia bips contínuos (a cada 800ms)
+function startContinuousBeeps() {
+    if (isAlarmPlaying) return;
+    
+    isAlarmPlaying = true;
+    
+    // Toca imediatamente o primeiro bip
+    playBeep();
+    
+    // Configura intervalo para bips contínuos
+    beepInterval = setInterval(() => {
+        if (isAlarmPlaying) {
+            playBeep();
+        }
+    }, 800);
+}
+
+// Para os bips
+function stopContinuousBeeps() {
+    isAlarmPlaying = false;
+    if (beepInterval) {
+        clearInterval(beepInterval);
+        beepInterval = null;
+    }
+}
+
+// Função para um bip único (usada em outros lugares se necessário)
+function beep() {
+    playBeep();
+}
+
+// ==================== DARK MODE ====================
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const icon = document.querySelector('#darkModeToggle i');
+    if (document.body.classList.contains('dark-mode')) {
+        icon.className = 'fas fa-sun';
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        icon.className = 'fas fa-moon';
+        localStorage.setItem('darkMode', 'disabled');
+    }
+}
+
+// Carregar preferência de dark mode
+if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    document.querySelector('#darkModeToggle i').className = 'fas fa-sun';
+}
+
+// ==================== NAVEGAÇÃO ====================
+function showSection(section) {
+    document.getElementById("timerSection").style.display = "none";
+    document.getElementById("stopwatchSection").style.display = "none";
+    document.getElementById("alarmSection").style.display = "none";
+    
+    document.getElementById(section + "Section").style.display = "block";
+    
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+}
+
+// ==================== RELÓGIOS ====================
+function updateClocks() {
+    const now = new Date();
+    
+    // Relógio principal
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    document.getElementById("mainTime").innerHTML = `${hours}:${minutes}:${seconds}`;
+    
+    // Data
+    const dias = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
+    const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+    document.getElementById("mainDate").innerHTML = 
+        `${dias[now.getDay()]}, ${now.getDate()} DE ${meses[now.getMonth()]} DE ${now.getFullYear()}`;
+    
+    // Relógios mundiais
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    
+    // Nova York (UTC-4)
+    const nyTime = new Date(utc - (4 * 60 * 60000));
+    document.getElementById("nyTime").innerHTML = nyTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById("nyDate").innerHTML = dias[nyTime.getDay()];
+    
+    // Londres (UTC+1)
+    const londonTime = new Date(utc + (1 * 60 * 60000));
+    document.getElementById("londonTime").innerHTML = londonTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById("londonDate").innerHTML = dias[londonTime.getDay()];
+    
+    // Tóquio (UTC+9)
+    const tokyoTime = new Date(utc + (9 * 60 * 60000));
+    document.getElementById("tokyoTime").innerHTML = tokyoTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById("tokyoDate").innerHTML = dias[tokyoTime.getDay()];
+}
+
+setInterval(updateClocks, 1000);
+updateClocks();
+
+// ==================== CONTAGEM REGRESSIVA ====================
+function updateCountdowns() {
+    const now = new Date();
+    
+    // Natal (25 de dezembro)
+    const natal = new Date(now.getFullYear(), 11, 25);
+    if (now > natal) natal.setFullYear(natal.getFullYear() + 1);
+    const diffNatal = natal - now;
+    const diasNatal = Math.floor(diffNatal / (1000 * 60 * 60 * 24));
+    const horasNatal = Math.floor((diffNatal % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutosNatal = Math.floor((diffNatal % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("countdownNatal").innerHTML = `${diasNatal}d ${horasNatal}h ${minutosNatal}m`;
+    
+    // Ano Novo (1º de janeiro)
+    const anoNovo = new Date(now.getFullYear() + 1, 0, 1);
+    const diffAnoNovo = anoNovo - now;
+    const diasAnoNovo = Math.floor(diffAnoNovo / (1000 * 60 * 60 * 24));
+    const horasAnoNovo = Math.floor((diffAnoNovo % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutosAnoNovo = Math.floor((diffAnoNovo % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("countdownAnoNovo").innerHTML = `${diasAnoNovo}d ${horasAnoNovo}h ${minutosAnoNovo}m`;
+    
+    // ENEM (primeiro domingo de novembro)
+    const enem = new Date(now.getFullYear(), 10, 1);
+    while (enem.getDay() !== 0) enem.setDate(enem.getDate() + 1);
+    if (now > enem) {
+        enem.setFullYear(enem.getFullYear() + 1);
+        enem.setMonth(10, 1);
+        while (enem.getDay() !== 0) enem.setDate(enem.getDate() + 1);
+    }
+    const diffEnem = enem - now;
+    const diasEnem = Math.floor(diffEnem / (1000 * 60 * 60 * 24));
+    const horasEnem = Math.floor((diffEnem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutosEnem = Math.floor((diffEnem % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("countdownEnem").innerHTML = `${diasEnem}d ${horasEnem}h ${minutosEnem}m`;
+    
+    // Copa 2026 (11 de junho de 2026)
+    const copa = new Date(2026, 5, 11);
+    const diffCopa = copa - now;
+    if (diffCopa > 0) {
+        const diasCopa = Math.floor(diffCopa / (1000 * 60 * 60 * 24));
+        const horasCopa = Math.floor((diffCopa % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutosCopa = Math.floor((diffCopa % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("countdownCopa").innerHTML = `${diasCopa}d ${horasCopa}h ${minutosCopa}m`;
+    }
+}
+
+setInterval(updateCountdowns, 60000);
+updateCountdowns();
+
+// ==================== TIMER ====================
+let timerInterval = null;
+
+function startTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    
+    let minutes = parseInt(document.getElementById("timerMinutes").value);
+    if (!minutes || minutes <= 0) {
+        alert("Por favor, digite um número válido de minutos");
+        return;
+    }
+    
+    let time = minutes * 60;
+    const timerDisplay = document.getElementById("timerDisplay");
+    const startButton = document.querySelector('#timerSection .btn-primary');
+    
+    startButton.disabled = true;
+    
+    timerInterval = setInterval(() => {
+        time--;
+        let m = Math.floor(time / 60);
+        let s = time % 60;
+        timerDisplay.innerHTML = String(m).padStart(2, '0') + ":" + String(s).padStart(2, '0');
+        
+        if (time <= 0) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerDisplay.innerHTML = "00:00";
+            
+            // Inicia bips contínuos
+            startContinuousBeeps();
+            
+            const notification = document.createElement("div");
+            notification.id = "timerNotification";
+            notification.className = "notification";
+            notification.innerHTML = `
+                <i class="fas fa-bell"></i>
+                ⏰ TEMPO FINALIZADO! 
+                <button onclick="stopTimerAlarm(this)">
+                    <i class="fas fa-stop"></i> PARAR
+                </button>
+            `;
+            document.body.appendChild(notification);
+            
+            startButton.disabled = false;
+        }
+    }, 1000);
+}
+
+function stopTimerAlarm(button) {
+    stopContinuousBeeps();
+    const notification = document.getElementById("timerNotification");
+    if (notification) notification.remove();
+}
+
+// ==================== CRONÔMETRO ====================
+let stopwatchInterval;
+let stopwatchTime = 0;
+let stopwatchRunning = false;
+
+function formatStopwatch(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    const milliseconds = ms % 1000;
+    
+    return {
+        main: String(hours).padStart(2, '0') + ":" + 
+              String(minutes).padStart(2, '0') + ":" + 
+              String(seconds).padStart(2, '0'),
+        ms: String(Math.floor(milliseconds / 10)).padStart(2, '0')
+    };
+}
+
+function startStopwatch() {
+    if (stopwatchRunning) return;
+    
+    stopwatchRunning = true;
+    const startTime = Date.now() - stopwatchTime;
+    
+    stopwatchInterval = setInterval(() => {
+        stopwatchTime = Date.now() - startTime;
+        const formatted = formatStopwatch(stopwatchTime);
+        document.getElementById("stopwatch").innerHTML = 
+            formatted.main + '<small>.' + formatted.ms + '</small>';
+    }, 10);
+}
+
+function stopStopwatch() {
+    clearInterval(stopwatchInterval);
+    stopwatchRunning = false;
+}
+
+function resetStopwatch() {
+    stopStopwatch();
+    stopwatchTime = 0;
+    document.getElementById("stopwatch").innerHTML = "00:00:00<small>.00</small>";
+}
+
+// ==================== ALARME ====================
+let alarmTime = null;
+let alarmInterval = null;
+let isAlarmRinging = false;
+
+function setAlarm() {
+    const alarmInput = document.getElementById("alarmTime").value;
+    if (!alarmInput) {
+        alert("Por favor, selecione um horário para o alarme");
+        return;
+    }
+
+    alarmTime = alarmInput;
+    document.getElementById("alarmStatus").innerHTML = `⏰ Alarme definido para ${alarmTime}. Aguarde...`;
+
+    if (alarmInterval) clearInterval(alarmInterval);
+
+    alarmInterval = setInterval(() => {
+        const now = new Date();
+        const current = now.getHours().toString().padStart(2, '0') + ":" + 
+                       now.getMinutes().toString().padStart(2, '0');
+
+        if (current === alarmTime && !isAlarmRinging) {
+            isAlarmRinging = true;
+            
+            document.getElementById("alarmStatus").innerHTML = `<span style="color: #b21f1f; font-weight: bold;">🔔 ALARME! Hora de ${alarmTime}</span>`;
+
+            // Inicia bips contínuos
+            startContinuousBeeps();
+
+            const alarmDiv = document.createElement("div");
+            alarmDiv.id = "alarmNotification";
+            alarmDiv.className = "notification";
+            alarmDiv.innerHTML = `
+                <i class="fas fa-bell"></i>
+                🔔 ALARME! ${alarmTime} 
+                <button onclick="stopAlarm()">
+                    <i class="fas fa-stop"></i> PARAR
+                </button>
+            `;
+            document.body.appendChild(alarmDiv);
+        }
+    }, 1000);
+}
+
+function stopAlarm() {
+    stopContinuousBeeps();
+    isAlarmRinging = false;
+    alarmTime = null;
+    const notification = document.getElementById("alarmNotification");
+    if (notification) notification.remove();
+    document.getElementById("alarmStatus").innerHTML = "Alarme desativado.";
+    if (alarmInterval) {
+        clearInterval(alarmInterval);
+        alarmInterval = null;
+    }
+}
+
+// ==================== COOKIES ====================
+function acceptCookies() {
+    document.getElementById('cookieNotice').style.display = 'none';
+    localStorage.setItem('cookiesAccepted', 'true');
+}
+
+function openCookiePreferences() {
+    alert('⚙️ Preferências de cookies - Em breve você poderá personalizar suas preferências!');
+}
+
+// Verificar se já aceitou cookies
+if (localStorage.getItem('cookiesAccepted') === 'true') {
+    document.getElementById('cookieNotice').style.display = 'none';
+}
+
+// ==================== COTAÇÕES ====================
+function updateQuotes() {
+    // Simulação de variação
+    const dolar = (5.79 + (Math.random() * 0.1 - 0.05)).toFixed(2);
+    const euro = (6.37 + (Math.random() * 0.1 - 0.05)).toFixed(2);
+    const libra = (7.41 + (Math.random() * 0.1 - 0.05)).toFixed(2);
+    const btc = (384649 + Math.random() * 2000 - 1000).toFixed(0);
+    
+    document.getElementById('dolarValue').innerHTML = dolar.replace('.', ',');
+    document.getElementById('euroValue').innerHTML = euro.replace('.', ',');
+    document.getElementById('libraValue').innerHTML = libra.replace('.', ',');
+    document.getElementById('btcValue').innerHTML = btc;
+    
+    // Variações
+    const dolarChange = (Math.random() * 0.3).toFixed(1);
+    const euroChange = (Math.random() * 0.3).toFixed(1);
+    const libraChange = (Math.random() * 0.3).toFixed(1);
+    const btcChange = (Math.random() * 1.5).toFixed(1);
+    
+    document.getElementById('dolarChange').innerHTML = (Math.random() > 0.5 ? '+' : '-') + dolarChange + '%';
+    document.getElementById('euroChange').innerHTML = (Math.random() > 0.5 ? '+' : '-') + euroChange + '%';
+    document.getElementById('libraChange').innerHTML = (Math.random() > 0.5 ? '+' : '-') + libraChange + '%';
+    document.getElementById('btcChange').innerHTML = (Math.random() > 0.5 ? '+' : '-') + btcChange + '%';
+    document.getElementById('selicChange').innerHTML = '+0,25%';
+}
+
+setInterval(updateQuotes, 30000);
+updateQuotes();
+</script>
+</body>
+</html>
