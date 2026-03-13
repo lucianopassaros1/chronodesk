@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chronodesk | Timer, Cronômetro e Alarme Online</title>
-<meta name="description" content="Timer online, cronômetro com milissegundos, alarme e contagem regressiva. Cotações em tempo real.">
-<meta name="keywords" content="timer online, cronômetro, alarme, contagem regressiva, dólar, euro, bitcoin">
+<title>Chronodesk | Timer, Cronômetro e Alarme Online - Seu despertador brasileiro</title>
+<meta name="description" content="Timer online, cronômetro com milissegundos, alarme e contagem regressiva. Ferramentas gratuitas para controle do tempo.">
+<meta name="keywords" content="timer online, cronômetro, alarme, contagem regressiva, despertador brasileiro">
 <meta name="author" content="Chronodesk">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
@@ -163,6 +163,25 @@ body {
     margin-top: 5px;
 }
 
+/* Descrição do site */
+.site-description {
+    max-width: 1400px;
+    margin: 15px auto 5px;
+    padding: 0 20px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 50px;
+    backdrop-filter: blur(5px);
+}
+
+.site-description i {
+    margin: 0 5px;
+    color: #fdbb2d;
+}
+
 /* Navegação */
 nav {
     background: var(--card-bg);
@@ -254,6 +273,13 @@ nav {
 
 .card-title i {
     color: var(--accent-red);
+}
+
+.card-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 16px;
 }
 
 .time-display {
@@ -409,7 +435,7 @@ nav {
     gap: 30px;
 }
 
-/* Card do Planejador BR (antigo Calcula Meu Bolso PE) */
+/* Card do Planejador BR */
 .calculadora-card {
     background: linear-gradient(135deg, #1a2a6c, #0f1a3d);
     color: white;
@@ -703,41 +729,48 @@ nav {
 footer {
     background: #1a2a6c;
     color: white;
-    padding: 30px 20px 15px;
+    padding: 40px 20px 20px;
     margin-top: 40px;
 }
 
 .footer-content {
     max-width: 1400px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.footer-links {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    flex-wrap: wrap;
 }
 
-.footer-links a {
+.footer-section h3 {
+    color: #fdbb2d;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.footer-section p {
+    opacity: 0.8;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.footer-section a {
     color: white;
     text-decoration: none;
     opacity: 0.8;
     transition: opacity 0.3s;
+    display: block;
+    margin-bottom: 8px;
 }
 
-.footer-links a:hover {
+.footer-section a:hover {
     opacity: 1;
 }
 
 .copyright {
     text-align: center;
-    margin-top: 20px;
-    padding-top: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.1);
     opacity: 0.7;
     font-size: 13px;
@@ -895,6 +928,11 @@ footer {
                 <div class="date" id="mainDate">---, -- DE --- DE ----</div>
             </div>
         </div>
+        
+        <!-- Descrição do site (visível no celular também) -->
+        <div class="site-description">
+            <i class="fas fa-bell"></i> Seu despertador brasileiro • Timer online • Cronômetro • Alarme • Contagem regressiva <i class="fas fa-hourglass-half"></i>
+        </div>
     </div>
     
     <!-- Navegação -->
@@ -922,6 +960,7 @@ footer {
                     <i class="fas fa-hourglass-half"></i>
                     Timer Online
                 </h2>
+                <div class="card-subtitle">Conte os minutos para suas tarefas</div>
                 <div class="control-group">
                     <input type="number" id="timerMinutes" class="control-input" placeholder="Minutos" min="1" value="1">
                     <button class="btn btn-primary" onclick="startTimer()">
@@ -937,6 +976,7 @@ footer {
                     <i class="fas fa-stopwatch"></i>
                     Cronômetro
                 </h2>
+                <div class="card-subtitle">Precisão de milésimos de segundo</div>
                 <div class="stopwatch-display" id="stopwatch">
                     00:00:00<small>.00</small>
                 </div>
@@ -959,6 +999,7 @@ footer {
                     <i class="fas fa-bell"></i>
                     Alarme
                 </h2>
+                <div class="card-subtitle">Despertador para não esquecer seus compromissos</div>
                 <div class="control-group">
                     <input type="time" id="alarmTime" class="control-input" value="08:00">
                     <button class="btn btn-primary" onclick="setAlarm()">
@@ -1012,7 +1053,7 @@ footer {
                     <h2>Planejador BR</h2>
                 </div>
                 
-                <p style="margin-bottom: 15px; opacity: 0.9;">Calculadoras financeiras completas e gratuitas</p>
+                <p style="margin-bottom: 15px; opacity: 0.9;">📊 Suas planilhas financeiras completas e gratuitas</p>
                 
                 <!-- Cotações -->
                 <div class="quotes-container">
@@ -1032,24 +1073,24 @@ footer {
                     <div class="quote-item">
                         <span class="quote-name"><i class="fas fa-euro-sign"></i> Euro</span>
                         <span>
-                            <span class="quote-value" id="euroValue">6,37</span>
-                            <span class="quote-change negative" id="euroChange">-0,2%</span>
+                            <span class="quote-value" id="euroValue">6,33</span>
+                            <span class="quote-change positive" id="euroChange">+0,3%</span>
                         </span>
                     </div>
                     
                     <div class="quote-item">
                         <span class="quote-name"><i class="fas fa-pound-sign"></i> Libra</span>
                         <span>
-                            <span class="quote-value" id="libraValue">7,41</span>
-                            <span class="quote-change negative" id="libraChange">-0,1%</span>
+                            <span class="quote-value" id="libraValue">7,44</span>
+                            <span class="quote-change negative" id="libraChange">-0,3%</span>
                         </span>
                     </div>
                     
                     <div class="quote-item">
                         <span class="quote-name"><i class="fas fa-btc"></i> Bitcoin</span>
                         <span>
-                            <span class="quote-value" id="btcValue">384.649</span>
-                            <span class="quote-change negative" id="btcChange">-1,2%</span>
+                            <span class="quote-value" id="btcValue">384.183</span>
+                            <span class="quote-change positive" id="btcChange">+1,2%</span>
                         </span>
                     </div>
                     
@@ -1098,7 +1139,6 @@ footer {
                     </div>
                 </div>
                 
-                <!-- BOTÃO COM LINK ATUALIZADO -->
                 <button class="btn-calculadora" onclick="window.open('https://planejador-br.vercel.app/', '_blank')">
                     <i class="fas fa-external-link-alt"></i>
                     ACESSAR PLANEJADOR BR
@@ -1173,24 +1213,44 @@ footer {
         </div>
     </div>
     
-    <!-- Rodapé -->
+    <!-- Rodapé melhorado -->
     <footer>
         <div class="footer-content">
-            <div>
-                <h3 style="margin-bottom: 5px;">Chronodesk</h3>
-                <p style="opacity: 0.8; font-size: 14px;">Timer online + Planejador BR</p>
+            <div class="footer-section">
+                <h3>Chronodesk</h3>
+                <p><i class="fas fa-bell"></i> Seu despertador e timer online brasileiro.</p>
+                <p>Ferramentas gratuitas para controle do tempo: timer, cronômetro com milissegundos, alarme e contagem regressiva para datas especiais.</p>
+                <p style="margin-top: 10px;"><i class="fas fa-check-circle" style="color: #fdbb2d;"></i> 100% gratuito • Sem cadastro</p>
             </div>
             
-            <div class="footer-links">
-                <a href="#">Sobre</a>
-                <a href="#">Privacidade</a>
-                <a href="#">Termos</a>
-                <a href="#">Contato</a>
+            <div class="footer-section">
+                <h3>Quem Somos</h3>
+                <p>O Chronodesk nasceu para ajudar brasileiros a gerenciar seu tempo de forma simples e eficiente. Integrado ao <strong>Planejador BR</strong>, oferecemos também calculadoras financeiras para seu dia a dia.</p>
+                <p>Timer online • Cronômetro preciso • Alarme confiável • Contagem regressiva</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <a href="#" onclick="showSection('timer')"><i class="fas fa-hourglass-half"></i> Timer</a>
+                <a href="#" onclick="showSection('stopwatch')"><i class="fas fa-stopwatch"></i> Cronômetro</a>
+                <a href="#" onclick="showSection('alarm')"><i class="fas fa-bell"></i> Alarme</a>
+                <a href="https://planejador-br.vercel.app/" target="_blank"><i class="fas fa-calculator"></i> Planejador BR</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-envelope"></i> contato@chronodesk.com.br</p>
+                <p><i class="fas fa-globe"></i> www.chronodesk.com.br (em breve)</p>
+                <div style="display: flex; gap: 15px; margin-top: 15px;">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
             </div>
         </div>
         
         <div class="copyright">
-            <p>© 2026 Chronodesk - Timer, cronômetro com milissegundos, alarme contínuo</p>
+            <p>© 2026 Chronodesk - Timer online, cronômetro com milissegundos e alarme contínuo • Feito no Brasil 🇧🇷</p>
         </div>
     </footer>
     
@@ -1219,7 +1279,6 @@ function initAudio() {
     return audioContext;
 }
 
-// Função para tocar um bip curto
 function playBeep() {
     try {
         const ctx = initAudio();
@@ -1239,22 +1298,19 @@ function playBeep() {
         gain.connect(ctx.destination);
         
         osc.start();
-        osc.stop(ctx.currentTime + 0.15); // Bip curto de 150ms
+        osc.stop(ctx.currentTime + 0.15);
     } catch (e) {
         console.log("Erro ao tocar bip:", e);
     }
 }
 
-// Inicia bips contínuos (a cada 800ms)
 function startContinuousBeeps() {
     if (isAlarmPlaying) return;
     
     isAlarmPlaying = true;
     
-    // Toca imediatamente o primeiro bip
     playBeep();
     
-    // Configura intervalo para bips contínuos
     beepInterval = setInterval(() => {
         if (isAlarmPlaying) {
             playBeep();
@@ -1262,18 +1318,12 @@ function startContinuousBeeps() {
     }, 800);
 }
 
-// Para os bips
 function stopContinuousBeeps() {
     isAlarmPlaying = false;
     if (beepInterval) {
         clearInterval(beepInterval);
         beepInterval = null;
     }
-}
-
-// Função para um bip único (usada em outros lugares se necessário)
-function beep() {
-    playBeep();
 }
 
 // ==================== DARK MODE ====================
@@ -1289,7 +1339,6 @@ function toggleDarkMode() {
     }
 }
 
-// Carregar preferência de dark mode
 if (localStorage.getItem('darkMode') === 'enabled') {
     document.body.classList.add('dark-mode');
     document.querySelector('#darkModeToggle i').className = 'fas fa-sun';
@@ -1311,32 +1360,26 @@ function showSection(section) {
 function updateClocks() {
     const now = new Date();
     
-    // Relógio principal
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const seconds = now.getSeconds().toString().padStart(2, '0');
     document.getElementById("mainTime").innerHTML = `${hours}:${minutes}:${seconds}`;
     
-    // Data
     const dias = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
     const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
     document.getElementById("mainDate").innerHTML = 
         `${dias[now.getDay()]}, ${now.getDate()} DE ${meses[now.getMonth()]} DE ${now.getFullYear()}`;
     
-    // Relógios mundiais
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
     
-    // Nova York (UTC-4)
     const nyTime = new Date(utc - (4 * 60 * 60000));
     document.getElementById("nyTime").innerHTML = nyTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     document.getElementById("nyDate").innerHTML = dias[nyTime.getDay()];
     
-    // Londres (UTC+1)
     const londonTime = new Date(utc + (1 * 60 * 60000));
     document.getElementById("londonTime").innerHTML = londonTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     document.getElementById("londonDate").innerHTML = dias[londonTime.getDay()];
     
-    // Tóquio (UTC+9)
     const tokyoTime = new Date(utc + (9 * 60 * 60000));
     document.getElementById("tokyoTime").innerHTML = tokyoTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     document.getElementById("tokyoDate").innerHTML = dias[tokyoTime.getDay()];
@@ -1349,7 +1392,6 @@ updateClocks();
 function updateCountdowns() {
     const now = new Date();
     
-    // Natal (25 de dezembro)
     const natal = new Date(now.getFullYear(), 11, 25);
     if (now > natal) natal.setFullYear(natal.getFullYear() + 1);
     const diffNatal = natal - now;
@@ -1358,7 +1400,6 @@ function updateCountdowns() {
     const minutosNatal = Math.floor((diffNatal % (1000 * 60 * 60)) / (1000 * 60));
     document.getElementById("countdownNatal").innerHTML = `${diasNatal}d ${horasNatal}h ${minutosNatal}m`;
     
-    // Ano Novo (1º de janeiro)
     const anoNovo = new Date(now.getFullYear() + 1, 0, 1);
     const diffAnoNovo = anoNovo - now;
     const diasAnoNovo = Math.floor(diffAnoNovo / (1000 * 60 * 60 * 24));
@@ -1366,7 +1407,6 @@ function updateCountdowns() {
     const minutosAnoNovo = Math.floor((diffAnoNovo % (1000 * 60 * 60)) / (1000 * 60));
     document.getElementById("countdownAnoNovo").innerHTML = `${diasAnoNovo}d ${horasAnoNovo}h ${minutosAnoNovo}m`;
     
-    // ENEM (primeiro domingo de novembro)
     const enem = new Date(now.getFullYear(), 10, 1);
     while (enem.getDay() !== 0) enem.setDate(enem.getDate() + 1);
     if (now > enem) {
@@ -1380,7 +1420,6 @@ function updateCountdowns() {
     const minutosEnem = Math.floor((diffEnem % (1000 * 60 * 60)) / (1000 * 60));
     document.getElementById("countdownEnem").innerHTML = `${diasEnem}d ${horasEnem}h ${minutosEnem}m`;
     
-    // Copa 2026 (11 de junho de 2026)
     const copa = new Date(2026, 5, 11);
     const diffCopa = copa - now;
     if (diffCopa > 0) {
@@ -1426,7 +1465,6 @@ function startTimer() {
             timerInterval = null;
             timerDisplay.innerHTML = "00:00";
             
-            // Inicia bips contínuos
             startContinuousBeeps();
             
             const notification = document.createElement("div");
@@ -1524,7 +1562,6 @@ function setAlarm() {
             
             document.getElementById("alarmStatus").innerHTML = `<span style="color: #b21f1f; font-weight: bold;">🔔 ALARME! Hora de ${alarmTime}</span>`;
 
-            // Inicia bips contínuos
             startContinuousBeeps();
 
             const alarmDiv = document.createElement("div");
@@ -1565,25 +1602,22 @@ function openCookiePreferences() {
     alert('⚙️ Preferências de cookies - Em breve você poderá personalizar suas preferências!');
 }
 
-// Verificar se já aceitou cookies
 if (localStorage.getItem('cookiesAccepted') === 'true') {
     document.getElementById('cookieNotice').style.display = 'none';
 }
 
 // ==================== COTAÇÕES ====================
 function updateQuotes() {
-    // Simulação de variação
     const dolar = (5.79 + (Math.random() * 0.1 - 0.05)).toFixed(2);
-    const euro = (6.37 + (Math.random() * 0.1 - 0.05)).toFixed(2);
-    const libra = (7.41 + (Math.random() * 0.1 - 0.05)).toFixed(2);
-    const btc = (384649 + Math.random() * 2000 - 1000).toFixed(0);
+    const euro = (6.33 + (Math.random() * 0.1 - 0.05)).toFixed(2);
+    const libra = (7.44 + (Math.random() * 0.1 - 0.05)).toFixed(2);
+    const btc = (384183 + Math.random() * 2000 - 1000).toFixed(0);
     
     document.getElementById('dolarValue').innerHTML = dolar.replace('.', ',');
     document.getElementById('euroValue').innerHTML = euro.replace('.', ',');
     document.getElementById('libraValue').innerHTML = libra.replace('.', ',');
     document.getElementById('btcValue').innerHTML = btc;
     
-    // Variações
     const dolarChange = (Math.random() * 0.3).toFixed(1);
     const euroChange = (Math.random() * 0.3).toFixed(1);
     const libraChange = (Math.random() * 0.3).toFixed(1);
