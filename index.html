@@ -3,9 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chronodesk | Timer, Cronômetro e Alarme Online - Seu despertador brasileiro</title>
-<meta name="description" content="Timer online, cronômetro com milissegundos, alarme e contagem regressiva. Ferramentas gratuitas para controle do tempo.">
-<meta name="keywords" content="timer online, cronômetro, alarme, contagem regressiva, despertador brasileiro">
+<title>Chronodesk | Timer, Cronômetro e Alarme Online</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FLRPFNCM87"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FLRPFNCM87');
+</script>
+
+<meta name="description" content="Timer online, cronômetro com milissegundos, alarme e contagem regressiva. Cotações em tempo real.">
+<meta name="keywords" content="timer online, cronômetro, alarme, contagem regressiva, dólar, euro, bitcoin">
 <meta name="author" content="Chronodesk">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
@@ -163,25 +173,6 @@ body {
     margin-top: 5px;
 }
 
-/* Descrição do site */
-.site-description {
-    max-width: 1400px;
-    margin: 15px auto 5px;
-    padding: 0 20px;
-    text-align: center;
-    color: white;
-    font-size: 16px;
-    background: rgba(0,0,0,0.2);
-    padding: 10px;
-    border-radius: 50px;
-    backdrop-filter: blur(5px);
-}
-
-.site-description i {
-    margin: 0 5px;
-    color: #fdbb2d;
-}
-
 /* Navegação */
 nav {
     background: var(--card-bg);
@@ -273,13 +264,6 @@ nav {
 
 .card-title i {
     color: var(--accent-red);
-}
-
-.card-subtitle {
-    text-align: center;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-    font-size: 16px;
 }
 
 .time-display {
@@ -666,7 +650,7 @@ nav {
     color: white;
 }
 
-/* Notificações - BIPS CONTÍNUOS */
+/* Notificações */
 .notification {
     position: fixed;
     top: 100px;
@@ -725,11 +709,71 @@ nav {
     font-size: 14px;
 }
 
-/* Rodapé */
+/* Formulário de contato */
+.contact-form {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.contact-form h4 {
+    color: var(--accent-blue);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+.btn-enviar {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-red));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(178,31,31,0.3);
+}
+
+/* Rodapé melhorado */
 footer {
     background: #1a2a6c;
     color: white;
-    padding: 40px 20px 20px;
+    padding: 50px 20px 20px;
     margin-top: 40px;
 }
 
@@ -737,42 +781,59 @@ footer {
     max-width: 1400px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
 }
 
 .footer-section h3 {
     color: #fdbb2d;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: 18px;
 }
 
 .footer-section p {
-    opacity: 0.8;
+    opacity: 0.9;
     font-size: 14px;
     line-height: 1.6;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .footer-section a {
     color: white;
     text-decoration: none;
-    opacity: 0.8;
+    opacity: 0.9;
     transition: opacity 0.3s;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .footer-section a:hover {
     opacity: 1;
+    color: #fdbb2d;
+}
+
+.footer-section i {
+    width: 25px;
+    color: #fdbb2d;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.contact-info i {
+    font-size: 18px;
 }
 
 .copyright {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 40px;
     padding-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.1);
-    opacity: 0.7;
+    opacity: 0.8;
     font-size: 13px;
 }
 
@@ -928,11 +989,6 @@ footer {
                 <div class="date" id="mainDate">---, -- DE --- DE ----</div>
             </div>
         </div>
-        
-        <!-- Descrição do site (visível no celular também) -->
-        <div class="site-description">
-            <i class="fas fa-bell"></i> Seu despertador brasileiro • Timer online • Cronômetro • Alarme • Contagem regressiva <i class="fas fa-hourglass-half"></i>
-        </div>
     </div>
     
     <!-- Navegação -->
@@ -960,7 +1016,6 @@ footer {
                     <i class="fas fa-hourglass-half"></i>
                     Timer Online
                 </h2>
-                <div class="card-subtitle">Conte os minutos para suas tarefas</div>
                 <div class="control-group">
                     <input type="number" id="timerMinutes" class="control-input" placeholder="Minutos" min="1" value="1">
                     <button class="btn btn-primary" onclick="startTimer()">
@@ -970,13 +1025,12 @@ footer {
                 <div class="time-display" id="timerDisplay">00:00</div>
             </div>
             
-            <!-- Stopwatch Section com milissegundos -->
+            <!-- Stopwatch Section -->
             <div id="stopwatchSection" style="display: none;" class="function-card">
                 <h2 class="card-title">
                     <i class="fas fa-stopwatch"></i>
                     Cronômetro
                 </h2>
-                <div class="card-subtitle">Precisão de milésimos de segundo</div>
                 <div class="stopwatch-display" id="stopwatch">
                     00:00:00<small>.00</small>
                 </div>
@@ -999,7 +1053,6 @@ footer {
                     <i class="fas fa-bell"></i>
                     Alarme
                 </h2>
-                <div class="card-subtitle">Despertador para não esquecer seus compromissos</div>
                 <div class="control-group">
                     <input type="time" id="alarmTime" class="control-input" value="08:00">
                     <button class="btn btn-primary" onclick="setAlarm()">
@@ -1053,7 +1106,7 @@ footer {
                     <h2>Planejador BR</h2>
                 </div>
                 
-                <p style="margin-bottom: 15px; opacity: 0.9;">📊 Suas planilhas financeiras completas e gratuitas</p>
+                <p style="margin-bottom: 15px; opacity: 0.9;">Calculadoras financeiras completas e gratuitas</p>
                 
                 <!-- Cotações -->
                 <div class="quotes-container">
@@ -1073,24 +1126,24 @@ footer {
                     <div class="quote-item">
                         <span class="quote-name"><i class="fas fa-euro-sign"></i> Euro</span>
                         <span>
-                            <span class="quote-value" id="euroValue">6,33</span>
-                            <span class="quote-change positive" id="euroChange">+0,3%</span>
+                            <span class="quote-value" id="euroValue">6,37</span>
+                            <span class="quote-change negative" id="euroChange">-0,2%</span>
                         </span>
                     </div>
                     
                     <div class="quote-item">
                         <span class="quote-name"><i class="fas fa-pound-sign"></i> Libra</span>
                         <span>
-                            <span class="quote-value" id="libraValue">7,44</span>
-                            <span class="quote-change negative" id="libraChange">-0,3%</span>
+                            <span class="quote-value" id="libraValue">7,41</span>
+                            <span class="quote-change negative" id="libraChange">-0,1%</span>
                         </span>
                     </div>
                     
                     <div class="quote-item">
                         <span class="quote-name"><i class="fas fa-btc"></i> Bitcoin</span>
                         <span>
-                            <span class="quote-value" id="btcValue">384.183</span>
-                            <span class="quote-change positive" id="btcChange">+1,2%</span>
+                            <span class="quote-value" id="btcValue">384.649</span>
+                            <span class="quote-change negative" id="btcChange">-1,2%</span>
                         </span>
                     </div>
                     
@@ -1139,6 +1192,7 @@ footer {
                     </div>
                 </div>
                 
+                <!-- BOTÃO COM LINK ATUALIZADO -->
                 <button class="btn-calculadora" onclick="window.open('https://planejador-br.vercel.app/', '_blank')">
                     <i class="fas fa-external-link-alt"></i>
                     ACESSAR PLANEJADOR BR
@@ -1213,20 +1267,44 @@ footer {
         </div>
     </div>
     
-    <!-- Rodapé melhorado -->
+    <!-- Rodapé COMPLETO com contato e formulário -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Chronodesk</h3>
-                <p><i class="fas fa-bell"></i> Seu despertador e timer online brasileiro.</p>
-                <p>Ferramentas gratuitas para controle do tempo: timer, cronômetro com milissegundos, alarme e contagem regressiva para datas especiais.</p>
-                <p style="margin-top: 10px;"><i class="fas fa-check-circle" style="color: #fdbb2d;"></i> 100% gratuito • Sem cadastro</p>
+                <p>Seu timer, cronômetro e alarme online. Ferramentas gratuitas para controle do tempo, com integração ao Planejador BR para cálculos financeiros.</p>
+                <p><i class="fas fa-check-circle"></i> 100% gratuito • Sem cadastro</p>
             </div>
             
             <div class="footer-section">
-                <h3>Quem Somos</h3>
-                <p>O Chronodesk nasceu para ajudar brasileiros a gerenciar seu tempo de forma simples e eficiente. Integrado ao <strong>Planejador BR</strong>, oferecemos também calculadoras financeiras para seu dia a dia.</p>
-                <p>Timer online • Cronômetro preciso • Alarme confiável • Contagem regressiva</p>
+                <h3>Contato</h3>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <span>(81) 99748-8560</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>lucianopassaros@hotmail.com</span>
+                </div>
+                
+                <!-- Formulário de contato -->
+                <div class="contact-form">
+                    <h4><i class="fas fa-comment"></i> Fale Conosco</h4>
+                    <form id="contactForm" onsubmit="enviarMensagem(event)">
+                        <div class="form-group">
+                            <input type="text" id="nome" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Seu e-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="mensagem" placeholder="Sua mensagem" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-enviar">
+                            <i class="fas fa-paper-plane"></i> Enviar mensagem
+                        </button>
+                    </form>
+                </div>
             </div>
             
             <div class="footer-section">
@@ -1235,22 +1313,21 @@ footer {
                 <a href="#" onclick="showSection('stopwatch')"><i class="fas fa-stopwatch"></i> Cronômetro</a>
                 <a href="#" onclick="showSection('alarm')"><i class="fas fa-bell"></i> Alarme</a>
                 <a href="https://planejador-br.vercel.app/" target="_blank"><i class="fas fa-calculator"></i> Planejador BR</a>
+                <a href="#" onclick="showPrivacyPolicy()"><i class="fas fa-shield-alt"></i> Política de Privacidade</a>
+                <a href="#" onclick="showTerms()"><i class="fas fa-file-contract"></i> Termos de Uso</a>
             </div>
             
             <div class="footer-section">
-                <h3>Contato</h3>
-                <p><i class="fas fa-envelope"></i> contato@chronodesk.com.br</p>
-                <p><i class="fas fa-globe"></i> www.chronodesk.com.br (em breve)</p>
-                <div style="display: flex; gap: 15px; margin-top: 15px;">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                </div>
+                <h3>Sobre</h3>
+                <p>O Chronodesk foi desenvolvido para ajudar você a gerenciar seu tempo de forma simples e eficiente.</p>
+                <p><i class="fas fa-map-marker-alt"></i> Recife - PE, Brasil</p>
+                <p><i class="fas fa-heart" style="color: #fdbb2d;"></i> Feito com dedicação</p>
             </div>
         </div>
         
         <div class="copyright">
             <p>© 2026 Chronodesk - Timer online, cronômetro com milissegundos e alarme contínuo • Feito no Brasil 🇧🇷</p>
+            <p style="margin-top: 5px;">chronodeskbr.com.br</p>
         </div>
     </footer>
     
@@ -1308,7 +1385,6 @@ function startContinuousBeeps() {
     if (isAlarmPlaying) return;
     
     isAlarmPlaying = true;
-    
     playBeep();
     
     beepInterval = setInterval(() => {
@@ -1592,6 +1668,33 @@ function stopAlarm() {
     }
 }
 
+// ==================== FORMULÁRIO DE CONTATO ====================
+function enviarMensagem(event) {
+    event.preventDefault();
+    
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const mensagem = document.getElementById('mensagem').value;
+    
+    // Criar o link de e-mail
+    const assunto = encodeURIComponent(`Contato do Chronodesk - ${nome}`);
+    const corpo = encodeURIComponent(
+        `Nome: ${nome}\n` +
+        `E-mail: ${email}\n\n` +
+        `Mensagem:\n${mensagem}`
+    );
+    
+    // Abrir cliente de e-mail padrão
+    window.location.href = `mailto:lucianopassaros@hotmail.com?subject=${assunto}&body=${corpo}`;
+    
+    // Limpar formulário
+    document.getElementById('nome').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('mensagem').value = '';
+    
+    alert('Obrigado! Sua mensagem foi preparada no seu programa de e-mail. Basta enviar.');
+}
+
 // ==================== COOKIES ====================
 function acceptCookies() {
     document.getElementById('cookieNotice').style.display = 'none';
@@ -1602,6 +1705,15 @@ function openCookiePreferences() {
     alert('⚙️ Preferências de cookies - Em breve você poderá personalizar suas preferências!');
 }
 
+// ==================== POLÍTICAS ====================
+function showPrivacyPolicy() {
+    alert('📋 POLÍTICA DE PRIVACIDADE\n\nO Chronodesk respeita sua privacidade. As informações coletadas são usadas apenas para melhorar sua experiência. Não compartilhamos dados com terceiros. Cookies são utilizados para funcionalidades básicas do site.');
+}
+
+function showTerms() {
+    alert('📜 TERMOS DE USO\n\nAo usar o Chronodesk, você concorda com os seguintes termos:\n\n• Uso gratuito para fins pessoais\n• Não nos responsabilizamos por danos indiretos\n• O conteúdo pode ser alterado sem aviso prévio\n• Proibido uso para atividades ilícitas');
+}
+
 if (localStorage.getItem('cookiesAccepted') === 'true') {
     document.getElementById('cookieNotice').style.display = 'none';
 }
@@ -1609,9 +1721,9 @@ if (localStorage.getItem('cookiesAccepted') === 'true') {
 // ==================== COTAÇÕES ====================
 function updateQuotes() {
     const dolar = (5.79 + (Math.random() * 0.1 - 0.05)).toFixed(2);
-    const euro = (6.33 + (Math.random() * 0.1 - 0.05)).toFixed(2);
-    const libra = (7.44 + (Math.random() * 0.1 - 0.05)).toFixed(2);
-    const btc = (384183 + Math.random() * 2000 - 1000).toFixed(0);
+    const euro = (6.37 + (Math.random() * 0.1 - 0.05)).toFixed(2);
+    const libra = (7.41 + (Math.random() * 0.1 - 0.05)).toFixed(2);
+    const btc = (384649 + Math.random() * 2000 - 1000).toFixed(0);
     
     document.getElementById('dolarValue').innerHTML = dolar.replace('.', ',');
     document.getElementById('euroValue').innerHTML = euro.replace('.', ',');
